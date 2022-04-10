@@ -16,28 +16,33 @@
     'use strict';
 
     // Your code here...
+
+    // create a button
     var button = document.createElement("button");
     button.setAttribute("class", "btn btn-small animated rubberBand valign-wrapper green")
     button.setAttribute("id", "zOINDFblRN")
     var t = document.createTextNode("launch Start");
     button.appendChild(t);
     document.body.appendChild(button);
-    console.log(axios.defaults.adapter);
+
+    // console.log(axios.defaults.adapter);
 
     var sendThat = []
 
+    // function to get elements by class name
     function init() {
         const x = document.getElementsByClassName("ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left")
         second(x)
         console.log("init bitti")
     }
 
+    // function to get #document object from preview button
     function second(x) {
         console.log("list başladı")
         var list = []
         var pageNum = document.getElementsByClassName("ui-paginator-page ui-state-default ui-corner-all ui-state-active")
-        console.log("--", ((Number(pageNum[1].innerHTML)* 20) - 20))
-        for (let i = ((Number(pageNum[1].innerHTML)* 20) - 20); i < (((Number(pageNum[1].innerHTML)* 20) - 20) + x.length); i++) {
+        console.log("--", ((Number(pageNum[1].innerHTML) * 20) - 20))
+        for (let i = ((Number(pageNum[1].innerHTML) * 20) - 20); i < (((Number(pageNum[1].innerHTML) * 20) - 20) + x.length); i++) {
             console.log(i)
             var mert = ""
             PrimeFaces.ab({ source: `productApprovalTable:${i}:j_id_54`, process: `productApprovalTable:${i}:j_id_54`, update: `productApprovalTable:${i}:j_id_54`, oncomplete: function (xhr, status, args) { xhr.then((value) => { mert = value; list.push(mert) }) } })
@@ -51,7 +56,9 @@
         secondBucuk(list)
     }
 
+    // function to get links from #document object
     function secondBucuk(list) {
+        const x = document.getElementsByClassName("ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left")
         console.log("secondBucuk başladı: ", list)
 
         for (let i of list) {
@@ -68,12 +75,23 @@
         }
         console.log(sendThat)
 
+        // send link list to server
         setTimeout(function () {
             axios.defaults.adapter = axiosGmxhrAdapter;
-            axios.post("http://localhost:3000/list", sendThat ).then((res) => console.log(res.data))
+            axios.post("http://localhost:3000/list", sendThat).then((res) => {
+                console.log(res.data);
+
+                // get link list from server and change button Text
+                for (let i = 0; i < 20; i++) {
+                    console.log(x[i].innerText)
+                    console.log(res.data[i].statusCode)
+                    x[i].innerText = x[i].innerText + " " + (res.data[i].statusCode)
+                }
+            })
         }, 3000);
     }
 
+    // button click event
     var view = document.getElementById("zOINDFblRN")
     view.classList.add("view-set");
     view.addEventListener("click", () => init());
