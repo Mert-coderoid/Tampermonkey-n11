@@ -1,0 +1,3 @@
+PrimeFaces.ab({source:'productApprovalTable:0:j_id_54',process:'productApprovalTable:0:j_id_54',update:'productApprovalTable:0:j_id_54',oncomplete:function(xhr,status,args){previewDialogInit(xhr, status, args, productPreviewDialogWidget);;}});return false;
+
+PrimeFaces.ab({source:'productApprovalTable:0:j_id_54',process:'productApprovalTable:0:j_id_54',update:'productApprovalTable:0:j_id_54',oncomplete:function(xhr,status,args){previewDialogInit(xhr, status, args, productPreviewDialogWidget);;}});return false;
